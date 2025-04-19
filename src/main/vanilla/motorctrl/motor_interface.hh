@@ -10,7 +10,7 @@ namespace vanilla::motorctrl
 
 class motor_interface {
     public:
-	explicit motor_interface(std::string_view name) noexcept;
+	explicit motor_interface(std::string_view &&name) noexcept;
 
 	[[nodiscard]] auto get_name() const noexcept -> std::string_view;
 

@@ -2,7 +2,8 @@
 
 namespace vanilla::motorctrl
 {
-motor_interface::motor_interface(std::string_view name) noexcept : name_{ name }
+motor_interface::motor_interface(std::string_view &&name) noexcept
+	: name_{ name }
 {
 }
 
