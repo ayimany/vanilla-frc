@@ -4,23 +4,41 @@
 
 #include <frc/TimedRobot.h>
 #include <frc2/command/CommandPtr.h>
+#include <frc2/command/Commands.h>
 
-class Robot : public frc::TimedRobot {
+namespace vanilla::internal {
+
+class robot: public frc::TimedRobot {
 public:
-    Robot();
+    robot() noexcept;
+
     void RobotPeriodic() override;
+
     void DisabledInit() override;
+
     void DisabledPeriodic() override;
+
     void DisabledExit() override;
+
     void AutonomousInit() override;
+
     void AutonomousPeriodic() override;
+
     void AutonomousExit() override;
+
     void TeleopInit() override;
+
     void TeleopPeriodic() override;
+
     void TeleopExit() override;
+
     void TestInit() override;
+
     void TestPeriodic() override;
+
     void TestExit() override;
 
 private:
 };
+
+}

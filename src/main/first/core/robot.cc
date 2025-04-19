@@ -2,30 +2,65 @@
 
 #include <frc2/command/CommandScheduler.h>
 
-robot::robot() {}
+namespace vanilla::internal
+{
 
-void robot::RobotPeriodic() { frc2::CommandScheduler::GetInstance().Run(); }
+robot::robot() noexcept
+{
+}
 
-void robot::DisabledInit() {}
+void robot::RobotPeriodic()
+{
+	frc2::CommandScheduler::GetInstance().Run();
+}
 
-void robot::DisabledPeriodic() {}
+void robot::DisabledInit()
+{
+}
 
-void robot::DisabledExit() {}
+void robot::DisabledPeriodic()
+{
+}
 
-void robot::AutonomousInit() {}
+void robot::DisabledExit()
+{
+}
 
-void robot::AutonomousPeriodic() {}
+void robot::AutonomousInit()
+{
+}
 
-void robot::AutonomousExit() {}
+void robot::AutonomousPeriodic()
+{
+}
 
-void robot::TeleopInit() {}
+void robot::AutonomousExit()
+{
+}
 
-void robot::TeleopPeriodic() {}
+void robot::TeleopInit()
+{
+}
 
-void robot::TeleopExit() {}
+void robot::TeleopPeriodic()
+{
+}
 
-void robot::TestInit() { frc2::CommandScheduler::GetInstance().CancelAll(); }
+void robot::TeleopExit()
+{
+}
 
-void robot::TestPeriodic() {}
+void robot::TestInit()
+{
+	frc2::CommandScheduler::GetInstance().CancelAll();
+}
 
-void robot::TestExit() {}
+void robot::TestPeriodic()
+{
+}
+
+void robot::TestExit()
+{
+}
+
+}
