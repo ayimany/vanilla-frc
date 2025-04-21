@@ -4,13 +4,19 @@
 
 #include <ctre/phoenix6/TalonFX.hpp>
 
+#include "vanilla/conventions/adapters/ctre_spatial.hh"
 #include "vanilla/util/identification.hh"
 
 namespace vanilla::motorctrl
 {
 
+struct talonfx_configuration : motor_interface_configuration {
+	id::can_id id;
+};
+
 class talonfx_interface : public motor_interface {
-	explicit talonfx_interface(id::can_id id, std::string_view &&name);
+	explicit talonfx_interface(talonfx_configuration &&config,
+				   std::string_view &&name);
 
 	auto set_duty_cycle_output(double output) noexcept -> void override;
 

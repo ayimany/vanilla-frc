@@ -1,13 +1,25 @@
 #include "ctre.hh"
 
+#include "vanilla/conventions/adapters/ctre_spatial.hh"
+#include "vanilla/conventions/adapters/ctre_motorctrl.hh"
+
 namespace vanilla::motorctrl
 {
 
-talonfx_interface::talonfx_interface(id::can_id id, std::string_view &&name)
-	: motor_interface{ std::move(name) }
-	, internal_controller_{ id }
-	, id_{ id }
+talonfx_interface::talonfx_interface(talonfx_configuration &&config,
+				     std::string_view &&name)
+	: motor_interface{ std::move(name), std::move(config) }
+	, internal_controller_{ config.id }
+	, id_{ config.id }
 {
+	auto configurator = ctre::phoenix6::configs::TalonFXConfiguration{};
+
+	configurator.MotorOutput.Inverted =
+		conventions::adapters::to_ctre_inverted_value(config.direction);
+
+	configurator.MotorOutput.NeutralMode =
+		conventions::adapters::to_ctre_neutral_mode(
+			config.neutral_mode);
 }
 
 auto talonfx_interface::set_duty_cycle_output(double output) noexcept -> void

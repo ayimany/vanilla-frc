@@ -4,13 +4,26 @@
 #include <units/voltage.h>
 #include <units/angle.h>
 #include <units/angular_velocity.h>
+#include <units/current.h>
+
+#include "vanilla/spatial/rotational.hh"
 
 namespace vanilla::motorctrl
 {
 
+enum class motor_neutral_mode { BRAKE, COAST };
+
+struct motor_interface_configuration {
+	spatial::rotation_direction direction;
+	motor_neutral_mode neutral_mode;
+	units::ampere_t current_limit;
+};
+
 class motor_interface {
     public:
-	explicit motor_interface(std::string_view &&name) noexcept;
+	explicit motor_interface(
+		std::string_view &&name,
+		motor_interface_configuration &&config) noexcept;
 
 	[[nodiscard]] auto get_name() const noexcept -> std::string_view;
 
