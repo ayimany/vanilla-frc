@@ -1,11 +1,11 @@
 #pragma once
 
-#include <cstdint>
+#include <cstddef>
 
 namespace vanilla::id
 {
 
-using numeric_id = std::uint16_t;
-using can_id = std::uint16_t;
+using numeric_id = std::size_t;
+using can_id = std::size_t;
 
 }

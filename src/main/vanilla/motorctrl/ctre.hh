@@ -4,7 +4,6 @@
 
 #include <ctre/phoenix6/TalonFX.hpp>
 
-#include "vanilla/conventions/adapters/ctre_spatial.hh"
 #include "vanilla/util/identification.hh"
 
 namespace vanilla::motorctrl
@@ -18,15 +17,49 @@ class talonfx_interface : public motor_interface {
 	explicit talonfx_interface(talonfx_configuration &&config,
 				   std::string_view &&name);
 
-	auto set_duty_cycle_output(double output) noexcept -> void override;
+	///
+	/// PROFILING
+	///
 
-	auto
-	set_voltage_output(units::volt_t voltage) noexcept -> void override;
-
-	auto set_velocity(units::radians_per_second_t angular_velocity) noexcept
+	auto add_control_profile(std::size_t index,
+				 const motor_control_profile &control_profile)
 		-> void override;
 
-	auto set_position(units::radian_t angle) noexcept -> void override;
+	auto choose_control_profile(std::size_t index) -> void override;
+
+	auto add_motion_profile(std::size_t index,
+				const angular_motion_profile &profile)
+		-> void override;
+
+	auto choose_motion_profile(std::size_t index) -> void override;
+
+	///
+	/// OUTPUT
+	///
+
+	auto set_output(const duty_cycle_output_request request) noexcept
+		-> void override;
+
+	auto set_output(const voltage_output_request &request) noexcept
+		-> void override;
+
+	auto
+	set_output(const position_target_request &request,
+		   const std::optional<angular_motion_profile> &motion_profile =
+			   std::nullopt,
+		   const std::optional<motor_control_profile> &control_profile =
+			   std::nullopt) -> void override;
+
+	auto
+	set_output(const velocity_target_request &request,
+		   const std::optional<angular_velocity_profile>
+			   &velocity_profile = std::nullopt,
+		   const std::optional<motor_control_profile> &control_profile =
+			   std::nullopt) -> void override;
+
+	///
+	/// GETTERS
+	///
 
 	auto get_position() noexcept -> units::radian_t override;
 

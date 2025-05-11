@@ -7,11 +7,11 @@ namespace vanilla::conventions::adapters
 {
 
 [[nodiscard]] constexpr auto
-to_ctre_neutral_mode(motorctrl::motor_neutral_mode value)
+to_ctre_neutral_mode(motorctrl::neutral_behavior value)
 	-> ctre::phoenix6::signals::NeutralModeValue
 {
 	using NeutralModeValue = ctre::phoenix6::signals::NeutralModeValue;
-	return value == motorctrl::motor_neutral_mode::BRAKE ?
+	return value == motorctrl::neutral_behavior::brake ?
 		       NeutralModeValue::Brake :
 		       NeutralModeValue::Coast;
 }
